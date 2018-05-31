@@ -1,0 +1,22 @@
+{
+  "name": "sparkjs",
+  "version": "1.0.0",
+  "main": "lib/index",
+  "types": "lib/index",
+  "repository": "https://github.com/darti/sparkjs.git",
+  "author": "matthieu.dartiguenave@gmail.com",
+  "license": "MIT",
+  "scripts": {
+    "start": "npm run build:live",
+    "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- ./src/index.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^10.1.4",
+    "nodemon": "^1.17.5",
+    "ts-node": "^6.0.5",
+    "typescript": "^2.8.4"
+  },
+  "dependencies": {
+    "java": "^0.9.1"
+  }
+}
