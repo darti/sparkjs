@@ -1,1 +1,4 @@
 node_modules
+
+dependencies/target
+dependencies/project/target

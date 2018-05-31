@@ -8,7 +8,8 @@
   "license": "MIT",
   "scripts": {
     "start": "npm run build:live",
-    "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- ./src/index.ts"
+    "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- ./src/index.ts",
+    "classpath" : "cd dependencies & sbt \"export runtime:fullClasspath\""
   },
   "devDependencies": {
     "@types/node": "^10.1.4",
