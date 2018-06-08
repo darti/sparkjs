@@ -7,8 +7,8 @@
         "moduleResolution": "node",
         "sourceMap": true,
         "declaration": true,
-        "outDir": "lib",
-        "baseUrl": ".",
+        "outDir": "",
+        "baseUrl": "..",
         "paths": {
             "*": [
                 "node_modules/*",
