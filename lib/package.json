@@ -9,12 +9,13 @@
   "scripts": {
     "start": "npm run build:live",
     "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- ./src/index.ts",
-    "classpath" : "cd dependencies & sbt \"export runtime:fullClasspath\""
+    "classpath": "cd dependencies & sbt \"export runtime:fullClasspath\""
   },
   "devDependencies": {
     "@types/node": "^10.1.4",
     "nodemon": "^1.17.5",
     "ts-node": "^6.0.5",
+    "tslint": "^5.10.0",
     "typescript": "^2.8.4"
   },
   "dependencies": {

@@ -1,32 +1,17 @@
 package io.ekai.sparkjs.generator
 
+import java.nio.file.Paths
+
 import org.apache.spark.sql.SparkSession
 
 import scala.reflect.runtime.universe._
 
 object SparkReflection extends App {
 
-  def process(sym: MethodSymbol) = {
-    TsMethod(sym.name.toString, sym.returnType, sym.paramLists)
-  }
+  import TypeScriptEmitter._
 
-  def process(sym: TermSymbol) = {
-    TsMethod(sym.name.toString, sym.info, List.empty)
-  }
+  val tsSparkSession = walk(typeOf[SparkSession])
 
-  val sparkSessionType = typeOf[SparkSession].decls
-    .filter(_.isPublic)
-    .map(m => m.isMethod match {
-      case true => process(m.asMethod)
-      case _ => process(m.asTerm)
-    })
+  scala.tools.nsc.io.File(s"${Paths.get(tsSparkSessi on.name}.ts").writeAll(tsSparkSession.emit())
 
-
-  println(sparkSessionType.map(_.emit()) mkString "\n\n")
-
-  //  sparkSessionType.decls
-  //    .filter(_.isTerm)
-  //    .map(_.asTerm)
-  //    .filter(m => (m.isVal || m.isMethod) && ! m.isConstructor)
-  //    .map(m => m.asTerm)
 }
