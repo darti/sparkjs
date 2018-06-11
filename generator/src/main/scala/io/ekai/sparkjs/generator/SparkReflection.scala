@@ -2,17 +2,23 @@ package io.ekai.sparkjs.generator
 
 import java.nio.file.Paths
 
-import io.ekai.sparkjs.generator.emitter.{Parser, SimpleEmitter}
+import io.ekai.sparkjs.generator.emitter.Parser
 import org.apache.spark.sql.SparkSession
 
 import scala.reflect.runtime.universe._
 
 object SparkReflection extends App {
 
-  val tsSparkSession = new Parser().walk(typeOf[SparkSession])
-  val output = Paths.get("../lib/generated", s"${tsSparkSession.name}.ts")
+  import io.circe.generic.auto._
+  import io.circe.syntax._
 
-  val emitter = new SimpleEmitter()
-  scala.tools.nsc.io.File(output.toString).writeAll(emitter.emit(tsSparkSession))
+  val tsSparkSession = Parser(typeOf[SparkSession])
+  //val output = Paths.get("../lib/generated", s"${tsSparkSession.typ.name}.json")
+
+  val json = tsSparkSession.asJson
+
+  //scala.tools.nsc.io.File(output.toString).writeAll(json.toString())
+
+  println()
 
 }

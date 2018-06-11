@@ -2,7 +2,7 @@ package io.ekai.sparkjs.generator
 
 package object emitter {
 
-  trait TsEntity
+  sealed trait TsEntity
 
 
   case class TsType(name: String, path: List[String], args: List[TsType]) extends TsEntity
@@ -11,7 +11,7 @@ package object emitter {
 
   case class TsParameters(parameters: List[TsParameter]) extends TsEntity
 
-  case class TsClass(name: String, methods: Seq[TsMethod]) extends TsEntity
+  case class TsClass(typ: TsType, methods: Seq[TsMethod]) extends TsEntity
 
   case class TsMethod(name: String, returnType: TsType, parameters: TsParameters = TsParameters(List.empty)) extends TsEntity
 
