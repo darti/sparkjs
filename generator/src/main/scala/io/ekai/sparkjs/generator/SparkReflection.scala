@@ -13,12 +13,10 @@ object SparkReflection extends App {
   import io.circe.syntax._
 
   val tsSparkSession = Parser(typeOf[SparkSession])
-  //val output = Paths.get("../lib/generated", s"${tsSparkSession.typ.name}.json")
+  val output = Paths.get("../lib/generated", "definitions.json")
 
   val json = tsSparkSession.asJson
 
-  //scala.tools.nsc.io.File(output.toString).writeAll(json.toString())
-
-  println()
+  scala.tools.nsc.io.File(output.toString).writeAll(json.toString())
 
 }

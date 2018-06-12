@@ -14,8 +14,11 @@ object Parser {
       else {
         val h = todo.head
         val (cls, deps) = walk(h)
+        val newDone = done + h
 
-        (todo.tail, done + h, cls :: result)
+        println(h)
+
+        rec(todo.tail ++ (deps -- newDone), newDone, cls :: result)
       }
 
     }
@@ -35,7 +38,7 @@ object Parser {
     (TsClass(
       self,
       methods.map(_._1).toSeq),
-      methods.map(_._2).reduce(_ ++ _) & deps)
+      methods.map(_._2).fold(Set.empty)(_ ++ _) & deps)
   }
 
   private def process(sym: MethodSymbol): (TsMethod, Set[Type]) = {
@@ -56,7 +59,7 @@ object Parser {
       TsParameters(
         params.map(_._1)
       )),
-      params.map(_._2).reduce(_ ++ _) & deps)
+      params.map(_._2).fold(Set.empty)(_ ++ _) & deps)
   }
 
 
@@ -76,7 +79,7 @@ object Parser {
       typ.typeSymbol.name.toString,
       getPackage(typ.typeSymbol),
       args.map(_._1)),
-      args.map(_._2).reduce(_ ++ _)
+      args.map(_._2).fold(Set.empty)(_ ++ _) + typ
     )
   }
 
