@@ -9,10 +9,9 @@ package object emitter {
 
   case class TsParameter(name: String, typ: TsType) extends TsEntity
 
-  case class TsParameters(parameters: List[TsParameter]) extends TsEntity
 
   case class TsClass(typ: TsType, methods: Seq[TsMethod]) extends TsEntity
 
-  case class TsMethod(name: String, returnType: TsType, parameters: TsParameters = TsParameters(List.empty)) extends TsEntity
+  case class TsMethod(name: String, returnType: TsType, parameters: List[TsParameter] = List.empty) extends TsEntity
 
 }
