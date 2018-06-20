@@ -35,7 +35,7 @@ object Parser {
 
         println(h)
 
-        rec(todo.tail ++ (cls.dependencies -- newDone), newDone, cls.entity :: result)
+        /*rec*/(todo.tail ++ (cls.dependencies -- newDone), newDone, cls.entity :: result)
       }
 
     }
