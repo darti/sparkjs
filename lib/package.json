@@ -7,13 +7,12 @@
   "author": "matthieu.dartiguenave@gmail.com",
   "license": "MIT",
   "scripts": {
-    "start": "npm run build:live",
-    "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- ./src/index.ts"
+    "start": "ts-node-dev --respawn ./src/index.ts"
   },
   "devDependencies": {
     "@types/node": "^10.1.4",
-    "nodemon": "^1.17.5",
     "ts-node": "^6.0.5",
+    "ts-node-dev": "^1.0.0-pre.26",
     "ts-simple-ast": "^12.4.0",
     "tslint": "^5.10.0",
     "tslint-config-prettier": "^1.13.0",

@@ -15,8 +15,3 @@ libraryDependencies ++= Seq(
   "io.circe" %% "circe-generic",
   "io.circe" %% "circe-parser"
 ).map(_ % circeVersion)
-
-
-enablePlugins(com.mpc.scalats.sbt.TypeScriptGeneratorPlugin)
-
-emitClasses in generateTypeScript := true
