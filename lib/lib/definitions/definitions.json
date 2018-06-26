@@ -1,0 +1,1397 @@
+[
+  {
+    "typ" : {
+      "name" : "SparkSession",
+      "path" : [
+        "org",
+        "apache",
+        "spark",
+        "sql"
+      ],
+      "args" : [
+      ]
+    },
+    "methods" : [
+      {
+        "name" : "sparkContext",
+        "returnType" : {
+          "name" : "SparkContext",
+          "path" : [
+            "org",
+            "apache",
+            "spark"
+          ],
+          "args" : [
+          ]
+        },
+        "parameters" : [
+        ]
+      },
+      {
+        "name" : "version",
+        "returnType" : {
+          "name" : "String",
+          "path" : [
+            "java",
+            "lang"
+          ],
+          "args" : [
+          ]
+        },
+        "parameters" : [
+        ]
+      },
+      {
+        "name" : "sharedState",
+        "returnType" : {
+          "name" : "SharedState",
+          "path" : [
+            "org",
+            "apache",
+            "spark",
+            "sql",
+            "internal"
+          ],
+          "args" : [
+          ]
+        },
+        "parameters" : [
+        ]
+      },
+      {
+        "name" : "sessionState",
+        "returnType" : {
+          "name" : "SessionState",
+          "path" : [
+            "org",
+            "apache",
+            "spark",
+            "sql",
+            "internal"
+          ],
+          "args" : [
+          ]
+        },
+        "parameters" : [
+        ]
+      },
+      {
+        "name" : "sqlContext",
+        "returnType" : {
+          "name" : "SQLContext",
+          "path" : [
+            "org",
+            "apache",
+            "spark",
+            "sql"
+          ],
+          "args" : [
+          ]
+        },
+        "parameters" : [
+        ]
+      },
+      {
+        "name" : "conf",
+        "returnType" : {
+          "name" : "RuntimeConfig",
+          "path" : [
+            "org",
+            "apache",
+            "spark",
+            "sql"
+          ],
+          "args" : [
+          ]
+        },
+        "parameters" : [
+        ]
+      },
+      {
+        "name" : "listenerManager",
+        "returnType" : {
+          "name" : "ExecutionListenerManager",
+          "path" : [
+            "org",
+            "apache",
+            "spark",
+            "sql",
+            "util"
+          ],
+          "args" : [
+          ]
+        },
+        "parameters" : [
+        ]
+      },
+      {
+        "name" : "experimental",
+        "returnType" : {
+          "name" : "ExperimentalMethods",
+          "path" : [
+            "org",
+            "apache",
+            "spark",
+            "sql"
+          ],
+          "args" : [
+          ]
+        },
+        "parameters" : [
+        ]
+      },
+      {
+        "name" : "udf",
+        "returnType" : {
+          "name" : "UDFRegistration",
+          "path" : [
+            "org",
+            "apache",
+            "spark",
+            "sql"
+          ],
+          "args" : [
+          ]
+        },
+        "parameters" : [
+        ]
+      },
+      {
+        "name" : "streams",
+        "returnType" : {
+          "name" : "StreamingQueryManager",
+          "path" : [
+            "org",
+            "apache",
+            "spark",
+            "sql",
+            "streaming"
+          ],
+          "args" : [
+          ]
+        },
+        "parameters" : [
+        ]
+      },
+      {
+        "name" : "newSession",
+        "returnType" : {
+          "name" : "SparkSession",
+          "path" : [
+            "org",
+            "apache",
+            "spark",
+            "sql"
+          ],
+          "args" : [
+          ]
+        },
+        "parameters" : [
+        ]
+      },
+      {
+        "name" : "emptyDataFrame",
+        "returnType" : {
+          "name" : "Dataset",
+          "path" : [
+            "org",
+            "apache",
+            "spark",
+            "sql"
+          ],
+          "args" : [
+          ]
+        },
+        "parameters" : [
+        ]
+      },
+      {
+        "name" : "emptyDataset",
+        "returnType" : {
+          "name" : "Dataset",
+          "path" : [
+            "org",
+            "apache",
+            "spark",
+            "sql"
+          ],
+          "args" : [
+            {
+              "name" : "T",
+              "path" : [
+                "org",
+                "apache",
+                "spark",
+                "sql"
+              ],
+              "args" : [
+              ]
+            }
+          ]
+        },
+        "parameters" : [
+          {
+            "name" : "evidence$1",
+            "typ" : {
+              "name" : "Encoder",
+              "path" : [
+                "org",
+                "apache",
+                "spark",
+                "sql"
+              ],
+              "args" : [
+                {
+                  "name" : "T",
+                  "path" : [
+                    "org",
+                    "apache",
+                    "spark",
+                    "sql"
+                  ],
+                  "args" : [
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name" : "createDataFrame",
+        "returnType" : {
+          "name" : "Dataset",
+          "path" : [
+            "org",
+            "apache",
+            "spark",
+            "sql"
+          ],
+          "args" : [
+          ]
+        },
+        "parameters" : [
+          {
+            "name" : "rdd",
+            "typ" : {
+              "name" : "RDD",
+              "path" : [
+                "org",
+                "apache",
+                "spark",
+                "rdd"
+              ],
+              "args" : [
+                {
+                  "name" : "A",
+                  "path" : [
+                    "org",
+                    "apache",
+                    "spark",
+                    "sql"
+                  ],
+                  "args" : [
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "name" : "evidence$2",
+            "typ" : {
+              "name" : "TypeTag",
+              "path" : [
+                "scala",
+                "reflect",
+                "api"
+              ],
+              "args" : [
+                {
+                  "name" : "A",
+                  "path" : [
+                    "org",
+                    "apache",
+                    "spark",
+                    "sql"
+                  ],
+                  "args" : [
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name" : "createDataFrame",
+        "returnType" : {
+          "name" : "Dataset",
+          "path" : [
+            "org",
+            "apache",
+            "spark",
+            "sql"
+          ],
+          "args" : [
+          ]
+        },
+        "parameters" : [
+          {
+            "name" : "data",
+            "typ" : {
+              "name" : "Seq",
+              "path" : [
+                "scala",
+                "collection"
+              ],
+              "args" : [
+                {
+                  "name" : "A",
+                  "path" : [
+                    "org",
+                    "apache",
+                    "spark",
+                    "sql"
+                  ],
+                  "args" : [
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "name" : "evidence$3",
+            "typ" : {
+              "name" : "TypeTag",
+              "path" : [
+                "scala",
+                "reflect",
+                "api"
+              ],
+              "args" : [
+                {
+                  "name" : "A",
+                  "path" : [
+                    "org",
+                    "apache",
+                    "spark",
+                    "sql"
+                  ],
+                  "args" : [
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name" : "createDataFrame",
+        "returnType" : {
+          "name" : "Dataset",
+          "path" : [
+            "org",
+            "apache",
+            "spark",
+            "sql"
+          ],
+          "args" : [
+          ]
+        },
+        "parameters" : [
+          {
+            "name" : "rowRDD",
+            "typ" : {
+              "name" : "RDD",
+              "path" : [
+                "org",
+                "apache",
+                "spark",
+                "rdd"
+              ],
+              "args" : [
+                {
+                  "name" : "Row",
+                  "path" : [
+                    "org",
+                    "apache",
+                    "spark",
+                    "sql"
+                  ],
+                  "args" : [
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "name" : "schema",
+            "typ" : {
+              "name" : "StructType",
+              "path" : [
+                "org",
+                "apache",
+                "spark",
+                "sql",
+                "types"
+              ],
+              "args" : [
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name" : "createDataFrame",
+        "returnType" : {
+          "name" : "Dataset",
+          "path" : [
+            "org",
+            "apache",
+            "spark",
+            "sql"
+          ],
+          "args" : [
+          ]
+        },
+        "parameters" : [
+          {
+            "name" : "rowRDD",
+            "typ" : {
+              "name" : "JavaRDD",
+              "path" : [
+                "org",
+                "apache",
+                "spark",
+                "api",
+                "java"
+              ],
+              "args" : [
+                {
+                  "name" : "Row",
+                  "path" : [
+                    "org",
+                    "apache",
+                    "spark",
+                    "sql"
+                  ],
+                  "args" : [
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "name" : "schema",
+            "typ" : {
+              "name" : "StructType",
+              "path" : [
+                "org",
+                "apache",
+                "spark",
+                "sql",
+                "types"
+              ],
+              "args" : [
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name" : "createDataFrame",
+        "returnType" : {
+          "name" : "Dataset",
+          "path" : [
+            "org",
+            "apache",
+            "spark",
+            "sql"
+          ],
+          "args" : [
+          ]
+        },
+        "parameters" : [
+          {
+            "name" : "rows",
+            "typ" : {
+              "name" : "List",
+              "path" : [
+                "java",
+                "util"
+              ],
+              "args" : [
+                {
+                  "name" : "Row",
+                  "path" : [
+                    "org",
+                    "apache",
+                    "spark",
+                    "sql"
+                  ],
+                  "args" : [
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "name" : "schema",
+            "typ" : {
+              "name" : "StructType",
+              "path" : [
+                "org",
+                "apache",
+                "spark",
+                "sql",
+                "types"
+              ],
+              "args" : [
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name" : "createDataFrame",
+        "returnType" : {
+          "name" : "Dataset",
+          "path" : [
+            "org",
+            "apache",
+            "spark",
+            "sql"
+          ],
+          "args" : [
+          ]
+        },
+        "parameters" : [
+          {
+            "name" : "rdd",
+            "typ" : {
+              "name" : "RDD",
+              "path" : [
+                "org",
+                "apache",
+                "spark",
+                "rdd"
+              ],
+              "args" : [
+                {
+                  "name" : "Any",
+                  "path" : [
+                    "scala"
+                  ],
+                  "args" : [
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "name" : "beanClass",
+            "typ" : {
+              "name" : "Class",
+              "path" : [
+                "java",
+                "lang"
+              ],
+              "args" : [
+                {
+                  "name" : "Any",
+                  "path" : [
+                    "scala"
+                  ],
+                  "args" : [
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name" : "createDataFrame",
+        "returnType" : {
+          "name" : "Dataset",
+          "path" : [
+            "org",
+            "apache",
+            "spark",
+            "sql"
+          ],
+          "args" : [
+          ]
+        },
+        "parameters" : [
+          {
+            "name" : "rdd",
+            "typ" : {
+              "name" : "JavaRDD",
+              "path" : [
+                "org",
+                "apache",
+                "spark",
+                "api",
+                "java"
+              ],
+              "args" : [
+                {
+                  "name" : "Any",
+                  "path" : [
+                    "scala"
+                  ],
+                  "args" : [
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "name" : "beanClass",
+            "typ" : {
+              "name" : "Class",
+              "path" : [
+                "java",
+                "lang"
+              ],
+              "args" : [
+                {
+                  "name" : "Any",
+                  "path" : [
+                    "scala"
+                  ],
+                  "args" : [
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name" : "createDataFrame",
+        "returnType" : {
+          "name" : "Dataset",
+          "path" : [
+            "org",
+            "apache",
+            "spark",
+            "sql"
+          ],
+          "args" : [
+          ]
+        },
+        "parameters" : [
+          {
+            "name" : "data",
+            "typ" : {
+              "name" : "List",
+              "path" : [
+                "java",
+                "util"
+              ],
+              "args" : [
+                {
+                  "name" : "Any",
+                  "path" : [
+                    "scala"
+                  ],
+                  "args" : [
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "name" : "beanClass",
+            "typ" : {
+              "name" : "Class",
+              "path" : [
+                "java",
+                "lang"
+              ],
+              "args" : [
+                {
+                  "name" : "Any",
+                  "path" : [
+                    "scala"
+                  ],
+                  "args" : [
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name" : "baseRelationToDataFrame",
+        "returnType" : {
+          "name" : "Dataset",
+          "path" : [
+            "org",
+            "apache",
+            "spark",
+            "sql"
+          ],
+          "args" : [
+          ]
+        },
+        "parameters" : [
+          {
+            "name" : "baseRelation",
+            "typ" : {
+              "name" : "BaseRelation",
+              "path" : [
+                "org",
+                "apache",
+                "spark",
+                "sql",
+                "sources"
+              ],
+              "args" : [
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name" : "createDataset",
+        "returnType" : {
+          "name" : "Dataset",
+          "path" : [
+            "org",
+            "apache",
+            "spark",
+            "sql"
+          ],
+          "args" : [
+            {
+              "name" : "T",
+              "path" : [
+                "org",
+                "apache",
+                "spark",
+                "sql"
+              ],
+              "args" : [
+              ]
+            }
+          ]
+        },
+        "parameters" : [
+          {
+            "name" : "data",
+            "typ" : {
+              "name" : "Seq",
+              "path" : [
+                "scala",
+                "collection"
+              ],
+              "args" : [
+                {
+                  "name" : "T",
+                  "path" : [
+                    "org",
+                    "apache",
+                    "spark",
+                    "sql"
+                  ],
+                  "args" : [
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "name" : "evidence$4",
+            "typ" : {
+              "name" : "Encoder",
+              "path" : [
+                "org",
+                "apache",
+                "spark",
+                "sql"
+              ],
+              "args" : [
+                {
+                  "name" : "T",
+                  "path" : [
+                    "org",
+                    "apache",
+                    "spark",
+                    "sql"
+                  ],
+                  "args" : [
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name" : "createDataset",
+        "returnType" : {
+          "name" : "Dataset",
+          "path" : [
+            "org",
+            "apache",
+            "spark",
+            "sql"
+          ],
+          "args" : [
+            {
+              "name" : "T",
+              "path" : [
+                "org",
+                "apache",
+                "spark",
+                "sql"
+              ],
+              "args" : [
+              ]
+            }
+          ]
+        },
+        "parameters" : [
+          {
+            "name" : "data",
+            "typ" : {
+              "name" : "RDD",
+              "path" : [
+                "org",
+                "apache",
+                "spark",
+                "rdd"
+              ],
+              "args" : [
+                {
+                  "name" : "T",
+                  "path" : [
+                    "org",
+                    "apache",
+                    "spark",
+                    "sql"
+                  ],
+                  "args" : [
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "name" : "evidence$5",
+            "typ" : {
+              "name" : "Encoder",
+              "path" : [
+                "org",
+                "apache",
+                "spark",
+                "sql"
+              ],
+              "args" : [
+                {
+                  "name" : "T",
+                  "path" : [
+                    "org",
+                    "apache",
+                    "spark",
+                    "sql"
+                  ],
+                  "args" : [
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name" : "createDataset",
+        "returnType" : {
+          "name" : "Dataset",
+          "path" : [
+            "org",
+            "apache",
+            "spark",
+            "sql"
+          ],
+          "args" : [
+            {
+              "name" : "T",
+              "path" : [
+                "org",
+                "apache",
+                "spark",
+                "sql"
+              ],
+              "args" : [
+              ]
+            }
+          ]
+        },
+        "parameters" : [
+          {
+            "name" : "data",
+            "typ" : {
+              "name" : "List",
+              "path" : [
+                "java",
+                "util"
+              ],
+              "args" : [
+                {
+                  "name" : "T",
+                  "path" : [
+                    "org",
+                    "apache",
+                    "spark",
+                    "sql"
+                  ],
+                  "args" : [
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "name" : "evidence$6",
+            "typ" : {
+              "name" : "Encoder",
+              "path" : [
+                "org",
+                "apache",
+                "spark",
+                "sql"
+              ],
+              "args" : [
+                {
+                  "name" : "T",
+                  "path" : [
+                    "org",
+                    "apache",
+                    "spark",
+                    "sql"
+                  ],
+                  "args" : [
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name" : "range",
+        "returnType" : {
+          "name" : "Dataset",
+          "path" : [
+            "org",
+            "apache",
+            "spark",
+            "sql"
+          ],
+          "args" : [
+            {
+              "name" : "Long",
+              "path" : [
+                "java",
+                "lang"
+              ],
+              "args" : [
+              ]
+            }
+          ]
+        },
+        "parameters" : [
+          {
+            "name" : "end",
+            "typ" : {
+              "name" : "Long",
+              "path" : [
+                "scala"
+              ],
+              "args" : [
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name" : "range",
+        "returnType" : {
+          "name" : "Dataset",
+          "path" : [
+            "org",
+            "apache",
+            "spark",
+            "sql"
+          ],
+          "args" : [
+            {
+              "name" : "Long",
+              "path" : [
+                "java",
+                "lang"
+              ],
+              "args" : [
+              ]
+            }
+          ]
+        },
+        "parameters" : [
+          {
+            "name" : "start",
+            "typ" : {
+              "name" : "Long",
+              "path" : [
+                "scala"
+              ],
+              "args" : [
+              ]
+            }
+          },
+          {
+            "name" : "end",
+            "typ" : {
+              "name" : "Long",
+              "path" : [
+                "scala"
+              ],
+              "args" : [
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name" : "range",
+        "returnType" : {
+          "name" : "Dataset",
+          "path" : [
+            "org",
+            "apache",
+            "spark",
+            "sql"
+          ],
+          "args" : [
+            {
+              "name" : "Long",
+              "path" : [
+                "java",
+                "lang"
+              ],
+              "args" : [
+              ]
+            }
+          ]
+        },
+        "parameters" : [
+          {
+            "name" : "start",
+            "typ" : {
+              "name" : "Long",
+              "path" : [
+                "scala"
+              ],
+              "args" : [
+              ]
+            }
+          },
+          {
+            "name" : "end",
+            "typ" : {
+              "name" : "Long",
+              "path" : [
+                "scala"
+              ],
+              "args" : [
+              ]
+            }
+          },
+          {
+            "name" : "step",
+            "typ" : {
+              "name" : "Long",
+              "path" : [
+                "scala"
+              ],
+              "args" : [
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name" : "range",
+        "returnType" : {
+          "name" : "Dataset",
+          "path" : [
+            "org",
+            "apache",
+            "spark",
+            "sql"
+          ],
+          "args" : [
+            {
+              "name" : "Long",
+              "path" : [
+                "java",
+                "lang"
+              ],
+              "args" : [
+              ]
+            }
+          ]
+        },
+        "parameters" : [
+          {
+            "name" : "start",
+            "typ" : {
+              "name" : "Long",
+              "path" : [
+                "scala"
+              ],
+              "args" : [
+              ]
+            }
+          },
+          {
+            "name" : "end",
+            "typ" : {
+              "name" : "Long",
+              "path" : [
+                "scala"
+              ],
+              "args" : [
+              ]
+            }
+          },
+          {
+            "name" : "step",
+            "typ" : {
+              "name" : "Long",
+              "path" : [
+                "scala"
+              ],
+              "args" : [
+              ]
+            }
+          },
+          {
+            "name" : "numPartitions",
+            "typ" : {
+              "name" : "Int",
+              "path" : [
+                "scala"
+              ],
+              "args" : [
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name" : "catalog",
+        "returnType" : {
+          "name" : "Catalog",
+          "path" : [
+            "org",
+            "apache",
+            "spark",
+            "sql",
+            "catalog"
+          ],
+          "args" : [
+          ]
+        },
+        "parameters" : [
+        ]
+      },
+      {
+        "name" : "table",
+        "returnType" : {
+          "name" : "Dataset",
+          "path" : [
+            "org",
+            "apache",
+            "spark",
+            "sql"
+          ],
+          "args" : [
+          ]
+        },
+        "parameters" : [
+          {
+            "name" : "tableName",
+            "typ" : {
+              "name" : "String",
+              "path" : [
+                "java",
+                "lang"
+              ],
+              "args" : [
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name" : "sql",
+        "returnType" : {
+          "name" : "Dataset",
+          "path" : [
+            "org",
+            "apache",
+            "spark",
+            "sql"
+          ],
+          "args" : [
+          ]
+        },
+        "parameters" : [
+          {
+            "name" : "sqlText",
+            "typ" : {
+              "name" : "String",
+              "path" : [
+                "java",
+                "lang"
+              ],
+              "args" : [
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name" : "read",
+        "returnType" : {
+          "name" : "DataFrameReader",
+          "path" : [
+            "org",
+            "apache",
+            "spark",
+            "sql"
+          ],
+          "args" : [
+          ]
+        },
+        "parameters" : [
+        ]
+      },
+      {
+        "name" : "readStream",
+        "returnType" : {
+          "name" : "DataStreamReader",
+          "path" : [
+            "org",
+            "apache",
+            "spark",
+            "sql",
+            "streaming"
+          ],
+          "args" : [
+          ]
+        },
+        "parameters" : [
+        ]
+      },
+      {
+        "name" : "time",
+        "returnType" : {
+          "name" : "T",
+          "path" : [
+            "org",
+            "apache",
+            "spark",
+            "sql"
+          ],
+          "args" : [
+          ]
+        },
+        "parameters" : [
+          {
+            "name" : "f",
+            "typ" : {
+              "name" : "<byname>",
+              "path" : [
+                "scala"
+              ],
+              "args" : [
+                {
+                  "name" : "T",
+                  "path" : [
+                    "org",
+                    "apache",
+                    "spark",
+                    "sql"
+                  ],
+                  "args" : [
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name" : "implicits",
+        "returnType" : {
+          "name" : "implicits",
+          "path" : [
+            "org",
+            "apache",
+            "spark",
+            "sql"
+          ],
+          "args" : [
+          ]
+        },
+        "parameters" : [
+        ]
+      },
+      {
+        "name" : "stop",
+        "returnType" : {
+          "name" : "Unit",
+          "path" : [
+            "scala"
+          ],
+          "args" : [
+          ]
+        },
+        "parameters" : [
+        ]
+      },
+      {
+        "name" : "close",
+        "returnType" : {
+          "name" : "Unit",
+          "path" : [
+            "scala"
+          ],
+          "args" : [
+          ]
+        },
+        "parameters" : [
+        ]
+      },
+      {
+        "name" : "internalCreateDataFrame$default$3",
+        "returnType" : {
+          "name" : "Boolean",
+          "path" : [
+            "scala"
+          ],
+          "args" : [
+          ]
+        },
+        "parameters" : [
+        ]
+      }
+    ]
+  }
+]

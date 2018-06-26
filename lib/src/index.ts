@@ -3,18 +3,22 @@ import Project from 'ts-simple-ast';
 import {join}from 'path';
 import {ClassDef} from './generator-model';
 
+import del from 'del';
+
+const root = 'lib/generated';
+
+del(root);
+
 const project = new Project({
     tsConfigFilePath: 'lib/tsconfig.json'
 });
 
-const root = 'lib/generated';
-
 const definitions = JSON.parse(
-  readFileSync('lib/generated/definitions.json', 'utf8')
+  readFileSync('lib/definitions/definitions.json', 'utf8')
 ) as ClassDef[];
 
 
-const wrapper = project.getSourceFile('interop/wrapper.ts');
+const wrapper = project.getSourceFile('wrapper.ts');
 
 
 definitions.forEach(cd => {
@@ -29,7 +33,8 @@ definitions.forEach(cd => {
 
   src.addImportDeclaration({
     namedImports: ['Wrapper'],
-    moduleSpecifier: src.getRelativePathTo(wrapper)
+    moduleSpecifier: src.getRelativePathAsModuleSpecifierTo(wrapper),
+
   })
 
   src.saveSync();

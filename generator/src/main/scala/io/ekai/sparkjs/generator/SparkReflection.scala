@@ -14,7 +14,7 @@ object SparkReflection extends App {
 
   val tsSparkSession = Parser(typeOf[SparkSession])
 
-  val outputDir = Paths.get("..", "lib", "lib", "generated")
+  val outputDir = Paths.get("..", "lib", "lib", "definitions")
   outputDir.toFile.mkdirs()
 
   val output = outputDir.resolve( "definitions.json")
