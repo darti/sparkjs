@@ -1,0 +1,16 @@
+{
+  "name": "sparkjs",
+  "version": "1.0.0",
+  "description": "Javascript binding for Apache Spark",
+  "main": "index.js",
+  "author": "Matthieu Dartiguenave <matthieu.dartiguenave@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "java": "^0.10.0"
+  },
+  "devDependencies": {
+    "@types/java": "^0.7.32",
+    "@types/node": "^10.3.6",
+    "typescript": "^2.9.2"
+  }
+}
