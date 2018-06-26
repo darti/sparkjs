@@ -13,7 +13,11 @@ object SparkReflection extends App {
   import io.circe.syntax._
 
   val tsSparkSession = Parser(typeOf[SparkSession])
-  val output = Paths.get("../lib/generated", "definitions.json")
+
+  val outputDir = Paths.get("..", "lib", "generated")
+  outputDir.toFile.mkdirs()
+
+  val output = outputDir.resolve( "definitions.json")
 
   val json = tsSparkSession.asJson
 
