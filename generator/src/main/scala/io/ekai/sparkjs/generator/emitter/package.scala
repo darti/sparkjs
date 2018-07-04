@@ -14,12 +14,11 @@ package object emitter {
 
   case class TsClass(
                       typ: TsType,
+                      static: Boolean,
                       methods: Seq[TsMethod],
-                      staticMethods: Seq[TsMethod],
-                      innerClasses: Seq[TsClass],
-                      staticInnerClasses: Seq[TsClass]
+                      innerClasses: Seq[TsClass]
                     ) extends TsEntity
 
-  case class TsMethod(name: String, returnType: TsType, parameters: List[TsParameter] = List.empty) extends TsEntity
+  case class TsMethod(name: String, static: Boolean, returnType: TsType, parameters: List[TsParameter] = List.empty) extends TsEntity
 
 }

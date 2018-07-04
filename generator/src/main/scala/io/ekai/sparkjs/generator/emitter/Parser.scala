@@ -23,19 +23,23 @@ object Parser {
       )
   }
 
-
   def apply(rootTypes: Type*): Seq[TsClass] = {
 
     def rec(todo: Set[Type], done: Set[Type], result: List[TsClass]): (Set[Type], Set[Type], List[TsClass]) = {
       if (todo.isEmpty) (todo, done, result)
       else {
         val h = todo.head
-        val cls = walk(h)
         val newDone = done + h
 
-        println(h)
 
-        /*rec*/(todo.tail ++ (cls.dependencies -- newDone), newDone, cls.entity :: result)
+        if (shouldProcess(h)) {
+          println(h)
+          val cls = walk(h, false)
+          rec(todo.tail ++ (cls.dependencies -- newDone), newDone, cls.entity :: result)
+        }
+        else {
+          rec(todo.tail, newDone, result)
+        }
       }
 
     }
@@ -43,54 +47,55 @@ object Parser {
     rec(rootTypes.toSet, Set.empty, List.empty)._3
   }
 
-  def walk(t: Type): ParserNode[TsClass] = {
+  def walk(t: Type, static: Boolean): ParserNode[TsClass] = {
 
 
-    val (met, inner) = members(t)
-    val (sMet, sInner) = members(t.companion)
+    val (met, inner) = members(t, false)
+    val (staticMet, staticInner) = members(t.companion, true)
 
-    val cls = ParserNode.merge(process(t), met, inner, sMet, sInner)
+    val cls = ParserNode.merge(process(t), met, inner, staticMet, staticInner)
 
     val tsCls = TsClass(
       cls.entity,
-      met.map(_.entity),
-      sMet.map(_.entity),
-      inner.map(_.entity),
-      sInner.map(_.entity))
+      static,
+      (met ++ staticMet).map(_.entity),
+      (inner ++ staticInner).map(_.entity))
 
     ParserNode(tsCls, cls.dependencies)
   }
 
-  private def members(t: Type): (List[ParserNode[TsMethod]], List[ParserNode[TsClass]]) =
-    t.decls
-      .filter(_.isPublic)
-      .map(m => {
-        if (m.isMethod)
-          (Some(process(m.asMethod)), None)
-        else if (m.isTerm)
-          (Some(process(m.asTerm)), None)
-        else if (m.isClass)
-          (None, Some(process(m.asClass)))
-        else {
-          (None, None)
-        }
-      })
-      .foldLeft((List.empty[ParserNode[TsMethod]], List.empty[ParserNode[TsClass]])) { (ac, e) =>
-      e match {
-        case (Some(m), None) => (m :: ac._1, ac._2)
-        case (None, Some(c)) => (ac._1, c :: ac._2)
-        case (Some(m), Some(c)) => (m :: ac._1, c :: ac._2)
-        case (None, None) => ac
+  private def members(t: Type, static: Boolean): (List[ParserNode[TsMethod]], List[ParserNode[TsClass]]) =
+    scala.util.Try(
+      t.decls
+        .filter(_.isPublic)
+        .map(m => {
+          if (m.isMethod)
+            (Some(process(m.asMethod, static)), None)
+          else if (m.isTerm)
+            (Some(process(m.asTerm, static)), None)
+          else if (m.isClass)
+            (None, Some(process(m.asClass, static)))
+          else {
+            (None, None)
+          }
+        })
+        .foldLeft((List.empty[ParserNode[TsMethod]], List.empty[ParserNode[TsClass]])) { (ac, e) =>
+          e match {
+            case (Some(m), None) => (m :: ac._1, ac._2)
+            case (None, Some(c)) => (ac._1, c :: ac._2)
+            case (Some(m), Some(c)) => (m :: ac._1, c :: ac._2)
+            case (None, None) => ac
 
-      }
-    }
+          }
+        }).getOrElse((List.empty, List.empty))
 
 
-  private def process(sym: MethodSymbol): ParserNode[TsMethod] = {
+  private def process(sym: MethodSymbol, static: Boolean): ParserNode[TsMethod] = {
     val ret = process(sym.returnType)
+    val boundTypes = sym.typeParams.map(_.asType)
 
     val params = sym.paramLists.flatten.map(s => {
-      val p = process(s.typeSignature)
+      val p = process(s.typeSignature, boundTypes.map(_.toType))
 
       ParserNode(TsParameter(
         s.name.decodedName.toString,
@@ -100,6 +105,7 @@ object Parser {
 
     val method = TsMethod(
       sym.name.toString,
+      static,
       ret.entity,
       params.map(_.entity))
 
@@ -111,22 +117,28 @@ object Parser {
     )
   }
 
-  private def process(cls: ClassSymbol) : ParserNode[TsClass] = {
-    walk(cls.selfType)
+  private def process(cls: ClassSymbol, static: Boolean): ParserNode[TsClass] = {
+    walk(cls.selfType, static)
   }
 
 
-  private def process(sym: TermSymbol): ParserNode[TsMethod] = {
+  private def process(sym: TermSymbol, static: Boolean): ParserNode[TsMethod] = {
     val ret = process(sym.info)
 
     ParserNode(TsMethod(
       sym.name.toString,
+      static,
       ret.entity),
       ret.dependencies)
   }
 
-  private def process(typ: Type): ParserNode[TsType] = {
-    val args = typ.typeArgs.map(process)
+  private def process(typ: Type, boundTypes: List[Type] = List.empty): ParserNode[TsType] = {
+    val args = scala.util.Try(
+      typ.typeArgs
+        .filter(t => !boundTypes.exists(t =:= _))
+        .map(t => process(t, boundTypes)))
+      .getOrElse(List.empty)
+
 
     val tsType = TsType(
       typ.typeSymbol.name.toString,
@@ -143,6 +155,13 @@ object Parser {
       else getPackageRec(s.owner)
 
     getPackageRec(sym)
+  }
+
+
+  def shouldProcess(typ: Type): Boolean = {
+    val pkg = getPackage(typ.typeSymbol)
+
+    pkg.size >= 3 && pkg(2) == "spark"
   }
 
 }
