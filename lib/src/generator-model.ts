@@ -11,11 +11,14 @@ export interface ParameterDef {
 
 export interface MethodDef {
     name: string;
+    static: boolean;
     returnType: TypeDef;
     parameters: ParameterDef[];
 }
 
 export interface ClassDef {
     typ: TypeDef;
+    static: boolean;
     methods: MethodDef[];
+    innerClasses: ClassDef[];
 }

@@ -7,10 +7,19 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Program",
+            "name": "Generate",
             "args": ["${workspaceFolder}/src/index.ts"],
             "runtimeArgs": ["--nolazy", "-r", "ts-node/register"],
             "cwd": "${workspaceRoot}",
+            "sourceMaps": true,
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Test",
+            "args": ["${workspaceFolder}/lib/tests/index.ts"],
+            "runtimeArgs": ["--nolazy", "-r", "ts-node/register"],
+            "cwd": "${workspaceRoot}/lib",
             "sourceMaps": true,
         }
     ]
