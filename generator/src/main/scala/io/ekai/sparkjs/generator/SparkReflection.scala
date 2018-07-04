@@ -12,6 +12,7 @@ object SparkReflection extends App {
   import io.circe.generic.auto._
   import io.circe.syntax._
 
+
   val tsSparkSession = Parser(typeOf[SparkSession])
 
   val outputDir = Paths.get("..", "lib", "lib", "definitions")

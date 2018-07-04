@@ -15,10 +15,10 @@ object Parser {
         subNodes.map(_.dependencies).fold(dependencies.toSet)(_ ++ _)
       )
 
-    def merge[E <: TsEntity](node: ParserNode[E], subNodes: Seq[ParserNode[_ <: TsEntity]]): ParserNode[E] =
+    def merge[E <: TsEntity](node: ParserNode[E], subNodes: Seq[ParserNode[_ <: TsEntity]]*): ParserNode[E] =
       ParserNode.merge(
         node.entity,
-        subNodes,
+        subNodes.flatten,
         (node.dependencies.toSeq: _*)
       )
   }
@@ -46,21 +46,45 @@ object Parser {
   def walk(t: Type): ParserNode[TsClass] = {
 
 
-    val methods = t.decls
-      .filter(_.isPublic)
-      .map(m => m.isMethod match {
-        case true => process(m.asMethod)
-        case _ => process(m.asTerm)
-      }).toSeq
+    val (met, inner) = members(t)
+    val (sMet, sInner) = members(t.companion)
 
-    val cls = ParserNode.merge(process(t), methods)
+    val cls = ParserNode.merge(process(t), met, inner, sMet, sInner)
 
     val tsCls = TsClass(
       cls.entity,
-      methods.map(_.entity))
+      met.map(_.entity),
+      sMet.map(_.entity),
+      inner.map(_.entity),
+      sInner.map(_.entity))
 
     ParserNode(tsCls, cls.dependencies)
   }
+
+  private def members(t: Type): (List[ParserNode[TsMethod]], List[ParserNode[TsClass]]) =
+    t.decls
+      .filter(_.isPublic)
+      .map(m => {
+        if (m.isMethod)
+          (Some(process(m.asMethod)), None)
+        else if (m.isTerm)
+          (Some(process(m.asTerm)), None)
+        else if (m.isClass)
+          (None, Some(process(m.asClass)))
+        else {
+          (None, None)
+        }
+      })
+      .foldLeft((List.empty[ParserNode[TsMethod]], List.empty[ParserNode[TsClass]])) { (ac, e) =>
+      e match {
+        case (Some(m), None) => (m :: ac._1, ac._2)
+        case (None, Some(c)) => (ac._1, c :: ac._2)
+        case (Some(m), Some(c)) => (m :: ac._1, c :: ac._2)
+        case (None, None) => ac
+
+      }
+    }
+
 
   private def process(sym: MethodSymbol): ParserNode[TsMethod] = {
     val ret = process(sym.returnType)
@@ -85,6 +109,10 @@ object Parser {
       params,
       sym.returnType
     )
+  }
+
+  private def process(cls: ClassSymbol) : ParserNode[TsClass] = {
+    walk(cls.selfType)
   }
 
 
