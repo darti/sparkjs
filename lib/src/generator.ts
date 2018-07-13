@@ -23,6 +23,8 @@ export class Generator {
 
   public generate(root: string, definitions: ClassDef[]) {
     definitions.forEach(cd => {
+      console.log(cd.typ.name);
+
       const output = join(root, ...cd.typ.path, `${cd.typ.name}.ts`);
       const src = this.project.createSourceFile(output, '', {
         overwrite: true
@@ -31,8 +33,7 @@ export class Generator {
       const cls = this.generateClass(src, cd);
       cd.innerClasses.forEach(icd => this.generateClass(src, icd));
 
-
-      src.addImportDeclaration({
+     src.addImportDeclaration({
         moduleSpecifier: src.getRelativePathAsModuleSpecifierTo(this.wrapper),
         namedImports: ['Wrapper']
       });
@@ -69,11 +70,12 @@ export class Generator {
   }
 
   private generateMethodCall(md: MethodDef) {
-    if(md.parameters.length === 0) {
-    return `this.callSync("${md.name}");`
-    }
-    else {
-      return `this.callSync("${md.name}", ${md.parameters.map(p => p.name).reduceRight((acc, e) => `${acc}, ${e}`)});`
+    if (md.parameters.length === 0) {
+      return `this.callSync("${md.name}");`;
+    } else {
+      return `return this.callSync("${md.name}", ${md.parameters
+        .map(p => p.name)
+        .reduceRight((acc, e) => `${acc}, ${e}`)});`;
     }
   }
 
@@ -84,3 +86,4 @@ export class Generator {
     };
   }
 }
+

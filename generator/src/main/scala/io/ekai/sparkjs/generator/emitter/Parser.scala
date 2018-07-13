@@ -25,17 +25,17 @@ object Parser {
 
   def apply(rootTypes: Type*): Seq[TsClass] = {
 
-    def rec(todo: Set[Type], done: Set[Type], result: List[TsClass]): (Set[Type], Set[Type], List[TsClass]) = {
+    def rec(todo: Set[Type], done: Set[String], result: List[TsClass]): (Set[Type], Set[String], List[TsClass]) = {
       if (todo.isEmpty) (todo, done, result)
       else {
         val h = todo.head
-        val newDone = done + h
+        val newDone = done + h.typeSymbol.fullName
 
 
         if (shouldProcess(h)) {
-          println(h)
+          println(s"$h")
           val cls = walk(h, false)
-          rec(todo.tail ++ (cls.dependencies -- newDone), newDone, cls.entity :: result)
+          rec(todo.tail ++ cls.dependencies.filterNot(t => newDone.contains(t.typeSymbol.fullName)), newDone, cls.entity :: result)
         }
         else {
           rec(todo.tail, newDone, result)
@@ -48,12 +48,12 @@ object Parser {
   }
 
   def walk(t: Type, static: Boolean): ParserNode[TsClass] = {
+    val boundTypes = t.typeParams.map(_.asType.toType)
 
+    val (met, inner) = members(t, boundTypes, false)
+    val (staticMet, staticInner) = members(t.companion, boundTypes, true)
 
-    val (met, inner) = members(t, false)
-    val (staticMet, staticInner) = members(t.companion, true)
-
-    val cls = ParserNode.merge(process(t), met, inner, staticMet, staticInner)
+    val cls = ParserNode.merge(process(t, boundTypes), met, inner, staticMet, staticInner)
 
     val tsCls = TsClass(
       cls.entity,
@@ -64,17 +64,17 @@ object Parser {
     ParserNode(tsCls, cls.dependencies)
   }
 
-  private def members(t: Type, static: Boolean): (List[ParserNode[TsMethod]], List[ParserNode[TsClass]]) =
+  private def members(t: Type, boundeTypes: List[Type], static: Boolean): (List[ParserNode[TsMethod]], List[ParserNode[TsClass]]) = {
     scala.util.Try(
       t.decls
         .filter(_.isPublic)
         .map(m => {
           if (m.isMethod)
-            (Some(process(m.asMethod, static)), None)
+            (Some(process(m.asMethod, boundeTypes, static)), None)
           else if (m.isTerm)
-            (Some(process(m.asTerm, static)), None)
+            (Some(process(m.asTerm, boundeTypes, static)), None)
           else if (m.isClass)
-            (None, Some(process(m.asClass, static)))
+            (None, Some(process(m.asClass, boundeTypes, static)))
           else {
             (None, None)
           }
@@ -88,14 +88,15 @@ object Parser {
 
           }
         }).getOrElse((List.empty, List.empty))
+  }
 
 
-  private def process(sym: MethodSymbol, static: Boolean): ParserNode[TsMethod] = {
-    val ret = process(sym.returnType)
-    val boundTypes = sym.typeParams.map(_.asType)
+  private def process(sym: MethodSymbol,  boundedTypes: List[Type], static: Boolean): ParserNode[TsMethod] = {
+    val boundTypes = sym.typeParams.map(_.asType.toType)
+    val ret = process(sym.returnType, boundTypes)
 
     val params = sym.paramLists.flatten.map(s => {
-      val p = process(s.typeSignature, boundTypes.map(_.toType))
+      val p = process(s.typeSignature, boundTypes)
 
       ParserNode(TsParameter(
         s.name.decodedName.toString,
@@ -117,13 +118,14 @@ object Parser {
     )
   }
 
-  private def process(cls: ClassSymbol, static: Boolean): ParserNode[TsClass] = {
+  private def process(cls: ClassSymbol, boundedTypes: List[Type], static: Boolean): ParserNode[TsClass] = {
+
     walk(cls.selfType, static)
   }
 
 
-  private def process(sym: TermSymbol, static: Boolean): ParserNode[TsMethod] = {
-    val ret = process(sym.info)
+  private def process(sym: TermSymbol, boundedTypes: List[Type], static: Boolean): ParserNode[TsMethod] = {
+    val ret = process(sym.info, boundedTypes)
 
     ParserNode(TsMethod(
       sym.name.toString,
@@ -132,10 +134,10 @@ object Parser {
       ret.dependencies)
   }
 
-  private def process(typ: Type, boundTypes: List[Type] = List.empty): ParserNode[TsType] = {
+  private def process(typ: Type, boundTypes: List[Type]): ParserNode[TsType] = {
     val args = scala.util.Try(
       typ.typeArgs
-        .filter(t => !boundTypes.exists(t =:= _))
+        .filterNot(t => boundTypes.exists(t =:= _))
         .map(t => process(t, boundTypes)))
       .getOrElse(List.empty)
 
