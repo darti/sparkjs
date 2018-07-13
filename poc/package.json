@@ -9,6 +9,7 @@
   },
   "devDependencies": {
     "@types/del": "^3.0.1",
+    "@types/java": "^0.7.32",
     "@types/node": "^10.1.4",
     "ts-node": "^6.0.5",
     "ts-node-dev": "^1.0.0-pre.26",
