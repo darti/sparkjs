@@ -1,5 +1,5 @@
 import java from 'java';
-import { Wrapper } from '../../interop/wrapper';
+import { Wrapper } from '../../interop';
 
 class Builder extends Wrapper {}
 
