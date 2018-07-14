@@ -1,8 +1,10 @@
 import { SparkSession } from './spark/sql/spark-session';
 
-const b = SparkSession.builder()
+const spark = SparkSession.builder()
   .master('local')
-  .appName('SparkJS');
+  .appName('SparkJS')
+  .getOrCreate();
 
+const df = spark.read.json('examples/people.json');
 
-  b.getOrCreate();
+df.show();

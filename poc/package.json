@@ -5,7 +5,7 @@
   "author": "matthieu.dartiguenave@gmail.com",
   "license": "MIT",
   "scripts": {
-    "start": "ts-node-dev --respawn --no-notify ./src/index.ts"
+    "start": "ts-node-dev --respawn --no-deps --no-notify ./src/index.ts"
   },
   "devDependencies": {
     "@types/del": "^3.0.1",

@@ -1,5 +1,6 @@
 import java from 'java';
 import { Wrapper } from '../../interop';
+import { DataFrameReader } from './data-frame-reader';
 
 class Builder extends Wrapper {
   public master(master: string): Builder {
@@ -24,5 +25,9 @@ export class SparkSession extends Wrapper {
     return new Builder(
       java.callStaticMethodSync('org.apache.spark.sql.SparkSession', 'builder')
     );
+  }
+
+  public get read(): DataFrameReader {
+      return new DataFrameReader(this.callSync('read'));
   }
 }
