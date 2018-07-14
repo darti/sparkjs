@@ -1,3 +1,8 @@
 import { SparkSession } from './spark/sql/spark-session';
 
-SparkSession.builder();
+const b = SparkSession.builder()
+  .master('local')
+  .appName('SparkJS');
+
+
+  b.getOrCreate();

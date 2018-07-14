@@ -8,7 +8,7 @@ export const logger = winston.createLogger({
     format.splat(), 
     format.cli()
   ),
-  level: 'debug',
+  level: 'info',
   transports: [new winston.transports.Console()]
 });
 
