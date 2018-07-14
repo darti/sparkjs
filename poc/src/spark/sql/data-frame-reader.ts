@@ -1,6 +1,6 @@
 import { DataFrame } from '.';
 import { Wrapper } from '../../interop';
-import { Dataset } from './data-set';
+import { Dataset } from './dataset';
 
 export class DataFrameReader extends Wrapper {
 

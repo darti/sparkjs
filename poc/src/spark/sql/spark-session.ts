@@ -1,6 +1,7 @@
 import java from 'java';
 import { Wrapper } from '../../interop';
 import { DataFrameReader } from './data-frame-reader';
+import { SQLImplicits } from './sql-implicits';
 
 class Builder extends Wrapper {
   public master(master: string): Builder {
@@ -29,5 +30,9 @@ export class SparkSession extends Wrapper {
 
   public get read(): DataFrameReader {
       return new DataFrameReader(this.callSync('read'));
+  }
+  
+  public get implicits(): SQLImplicits {
+    return this.callSync('implicits');
   }
 }

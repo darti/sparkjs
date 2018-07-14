@@ -1,0 +1,25 @@
+{
+  "name": "lambda-test",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "matthieu.dartiguenave@gmail.com",
+  "license": "MIT",
+  "scripts": {
+    "start": "ts-node-dev --respawn --no-deps --no-notify ./src/index.ts"
+  },
+  "devDependencies": {
+    "@types/java": "^0.7.32",
+    "@types/node": "^10.1.4",
+    "@types/winston": "^2.3.9",
+    "ts-node": "^6.0.5",
+    "ts-node-dev": "^1.0.0-pre.26",
+    "tslint": "^5.10.0",
+    "tslint-config-prettier": "^1.13.0",
+    "typescript": "^2.8.4"
+  },
+  "dependencies": {
+    "java": "^0.9.1",
+    "winston": "^3.0.0"
+  }
+
+}

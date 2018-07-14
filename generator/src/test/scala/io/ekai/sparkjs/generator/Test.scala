@@ -10,6 +10,6 @@ object Test extends App {
 
   val df = spark.read.json("examples/people.json")
 
-  df.
+  df.sparkSession.implicits.encod
 
 }
